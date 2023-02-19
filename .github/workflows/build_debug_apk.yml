@@ -52,27 +52,9 @@ jobs:
 
       - run: chmod 777 ./gradlew
 
-      - name: Build inrt template
-
-        run: |
-
-          chmod 777 ./gradlew
-
-          ./gradlew inrt:assembleTemplate
-
-          ls
-
       - name: Build App
 
-        run: |
-
-          ls  inrt/build/outputs/apk/template/release
-
-          mv  inrt/build/outputs/apk/template/release/*.apk  app/src/main/assets/template.apk
-
-          ls  app/src/main/assets
-
-          ./gradlew app:assembleCommonDebug
+        run: ./gradlew app:assembleCommonDebug
 
       - name: Upload apk to artifact 1
 
@@ -80,27 +62,6 @@ jobs:
 
         with:
 
-          name: app-common-arm64-v8a-debug.apk
+          name: app-common-debug.apk
 
-          path: app/build/outputs/apk/common/debug/app-common-arm64-v8a-debug.apk
-
-      - name: Upload apk to artifact 2
-
-        uses: actions/upload-artifact@v3
-
-        with:
-
-          name: app-common-armeabi-v7a-debug.apk
-
-          path: app/build/outputs/apk/common/debug/app-common-armeabi-v7a-debug.apk
-
-      - name: Upload apk to artifact 3
-
-        uses: actions/upload-artifact@v3
-
-        with:
-
-          name: app-common-universal-debug.apk
-
-          path: app/build/outputs/apk/common/debug/app-common-universal-debug.apk
-
+          path: app/build/outputs/apk/common/debug/*.apk
