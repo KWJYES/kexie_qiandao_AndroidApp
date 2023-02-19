@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AS Progects/kexie_qiandao_AndroidApp/app/src/main/res/layout/activity_main.xml" value="0.2210144927536232" />
         <entry key="..\:/AndroidStudioProgects/KexieQiandao/app/src/main/res/drawable/et_cursor.xml" value="0.2692307692307692" />
         <entry key="..\:/AndroidStudioProgects/KexieQiandao/app/src/main/res/drawable/notonline.xml" value="0.2692307692307692" />
         <entry key="..\:/AndroidStudioProgects/KexieQiandao/app/src/main/res/drawable/online.xml" value="0.2692307692307692" />
@@ -10,7 +11,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

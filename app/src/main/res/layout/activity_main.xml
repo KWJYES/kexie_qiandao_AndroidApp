@@ -64,6 +64,7 @@
             app:layout_constraintGuide_percent="0.9" />
 
         <EditText
+            android:text="@={vm.uid}"
             android:textColor="@color/black"
             android:textCursorDrawable="@drawable/et_cursor"
             android:layout_marginHorizontal="10dp"
@@ -109,7 +110,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="@{`本次签到开始时间: `+vm.time}"
+                    android:text="@{vm.time}"
                     android:textColor="@{vm.online?0xFF000000:0xFFFFFFFF}" />
 
                 <TextView
@@ -118,15 +119,23 @@
                     android:layout_marginTop="10dp"
                     android:text="@{`本周签到总时长: `+vm.totalTime}"
                     android:textColor="@{vm.online?0xFF000000:0xFFFFFFFF}" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@{`周序: `+vm.week}"
+                    android:textColor="@{vm.online?0xFF000000:0xFFFFFFFF}" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/qiandao"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="20dp"
             android:foreground="?attr/selectableItemBackground"
-            android:onClick="@{event::qiandao}"
+            android:onClick="@{event::qiandaoORqiantui}"
             app:cardCornerRadius="15dp"
             app:layout_constraintDimensionRatio="H,340:97"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
@@ -142,6 +151,27 @@
                 android:textSize="18sp" />
         </androidx.cardview.widget.CardView>
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="20dp"
+            android:text="ps:“本周签到总时长”可能不是最新数据；通过签到/签退可更新为最新数据~"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/qiandao" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:gravity="center"
+            android:text="更多功能敬请期待~\nbug反馈QQ:1610017676"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

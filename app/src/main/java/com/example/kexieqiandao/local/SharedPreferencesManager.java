@@ -5,7 +5,7 @@ import static android.content.Context.MODE_PRIVATE;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-public class SharedPreferencesManager implements ISharedPreferencesRequest {
+public class SharedPreferencesManager {
 
     /**
      * 使用单例模式
@@ -48,20 +48,39 @@ public class SharedPreferencesManager implements ISharedPreferencesRequest {
     }
 
 
-    /**
-     * 当前用户账号
-     * @param context
-     * @return
-     */
-    @Override
-    public String getAccount(Context context){
-        return getPref(context).getString("account","");
+    public String getUId(Context context){
+        return getPref(context).getString("uid","null");
     }
 
+    public void applyUId(Context context,String uid){
+        getEditor(context).putString("uid",uid);
+        getEditor(context).apply();
+    }
 
-    @Override
-    public void applyAccount(Context context,String account){
-        getEditor(context).putString("account",account);
+    public String getUName(Context context){
+        return getPref(context).getString("uname","null");
+    }
+
+    public void applyUName(Context context,String uname){
+        getEditor(context).putString("uname",uname);
+        getEditor(context).apply();
+    }
+
+    public String getWeek(Context context){
+        return getPref(context).getString("week","null");
+    }
+
+    public void applyWeek(Context context,String week){
+        getEditor(context).putString("week",week);
+        getEditor(context).apply();
+    }
+
+    public String getTotalTime(Context context){
+        return getPref(context).getString("totalTime","null");
+    }
+
+    public void applyTotalTime(Context context,String totalTime){
+        getEditor(context).putString("totalTime",totalTime);
         getEditor(context).apply();
     }
 

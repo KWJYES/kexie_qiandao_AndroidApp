@@ -22,6 +22,8 @@ public class MainActivity extends BaseActivity {
 
     private MainViewModel vm;
     private ActivityMainBinding binding;
+    private Toast toast0;
+
     @Override
     protected void initActivity() {
         setTransparentStatusBar(true);
@@ -47,7 +49,21 @@ public class MainActivity extends BaseActivity {
                     toast = Toast.makeText(MainActivity.this, "签到失败！", Toast.LENGTH_SHORT);
                 }else if (s.equals(MyApplication.qiantuiFail)){
                     toast = Toast.makeText(MainActivity.this, "签退失败！", Toast.LENGTH_SHORT);
+                }else if (s.equals(MyApplication.netWorkError)){
+                    toast = Toast.makeText(MainActivity.this, "网络错误！", Toast.LENGTH_SHORT);
+                } else if (s.equals(MyApplication.qiandaoRepeat)) {
+                    toast = Toast.makeText(MainActivity.this, "重复签到！", Toast.LENGTH_SHORT);
+                } else if (s.equals(MyApplication.qiantuiNo)) {
+                    toast = Toast.makeText(MainActivity.this, "您没还有签到！", Toast.LENGTH_SHORT);
+                }else if (s.equals(MyApplication.qiandaoOutTime)) {
+                    toast = Toast.makeText(MainActivity.this, "该时段不允许签到", Toast.LENGTH_LONG);
+                }else if (s.equals(MyApplication.initViewOk)){
+                    binding.editText.setEnabled(true);
+                    binding.qiandao.setClickable(true);
+                    toast0.cancel();
+                    toast = Toast.makeText(MainActivity.this, "加载完成！", Toast.LENGTH_SHORT);
                 }
+                if(toast==null) return;
                 toast.setGravity(Gravity.CENTER,0,0);
                 toast.show();
             }
@@ -56,19 +72,21 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        toast0 = Toast.makeText(MainActivity.this, "正在加载...", Toast.LENGTH_SHORT);
+        toast0.setGravity(Gravity.CENTER,0,0);
+        toast0.show();
+        binding.editText.setEnabled(false);
+        binding.qiandao.setClickable(false);
         vm.online.setValue(false);
-        vm.time.setValue("null");
-        vm.totalTime.setValue("null");
-        vm.uid.setValue("null");
-        vm.uname.setValue("null");
+        vm.online();
         Glide.with(this).load(R.drawable.logo)
                 .transform(new CenterCrop(), new RoundedCorners(10))
                 .into(binding.mainLogo);
     }
 
     public class Event{
-        public void qiandao(View view){
-            vm.qiandao();
+        public void qiandaoORqiantui(View view){
+            vm.qiandaoORqiantui();
         }
     }
 }
