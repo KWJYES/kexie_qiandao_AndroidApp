@@ -1,4 +1,4 @@
-#  <img src="image/README/logo.jpg" style="zoom:50%;" />    三院科协签到App
+#  <img src="image/README/logo.jpg" style="zoom:10%;" />    三院科协签到App
 
 form: 三院科协Android开发
 
