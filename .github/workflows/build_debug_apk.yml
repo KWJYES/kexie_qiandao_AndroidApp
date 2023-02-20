@@ -62,6 +62,6 @@ jobs:
 
         with:
 
-          name: app-common-debug.apk
+          name: app-debug.apk
 
-          path: app/build/outputs/apk/common/debug/*.apk
+          path: app/build/outputs/apk/debug/*.apk
