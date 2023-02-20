@@ -54,7 +54,7 @@ jobs:
 
       - name: Build App
 
-        run: ./gradlew app:assembleCommonDebug
+        run: ./gradlew app:assembleDebug
 
       - name: Upload apk to artifact 1
 
