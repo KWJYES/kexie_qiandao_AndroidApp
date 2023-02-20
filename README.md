@@ -16,7 +16,7 @@ form: 三院科协Android开发
 
 1、Fork本仓库
 
-2、向仓库发送Puul requests
+2、向仓库发送Pull requests
 
 3、提醒合并
 
