@@ -7,7 +7,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Part;
+import retrofit2.http.Path;
 
 public interface IService {
     @POST("/api/user/signIn")
@@ -17,6 +17,6 @@ public interface IService {
     Call<ResponseBody> signOut(@Body UserId userId);
 
     @GET("/api/record/online/{userId}")
-    Call<ResponseBody> online(@Part("userId") String userId);
+    Call<ResponseBody> online(@Path("userId") String userId);
 
 }

@@ -24,7 +24,8 @@ public class MyApplication extends Application {
     public static String qiandaoFail ="qiandaoFail";
     public static String qiantuiFail ="qiantuiFail";
     public static String qiandaoRepeat ="qiantuiRepeat";//重复签到
-    public static String qiantuiNo ="qiantuiNo";//没有签到
+    public static String qiantuiNo ="qiantuiNo";//没有签到op
+    public static String opTooFaster ="opTooFaster";//操作太频繁了
     public static String netWorkError ="netWorkError";
     public static String initViewOk ="initViewOk";
 }

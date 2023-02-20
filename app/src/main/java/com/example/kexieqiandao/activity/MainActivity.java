@@ -57,12 +57,14 @@ public class MainActivity extends BaseActivity {
                     toast = Toast.makeText(MainActivity.this, "您没还有签到！", Toast.LENGTH_SHORT);
                 }else if (s.equals(MyApplication.qiandaoOutTime)) {
                     toast = Toast.makeText(MainActivity.this, "该时段不允许签到", Toast.LENGTH_LONG);
+                }else if (s.equals(MyApplication.opTooFaster)) {
+                    toast = Toast.makeText(MainActivity.this, "宁操作太频繁了\n请稍后重试", Toast.LENGTH_LONG);
                 }else if (s.equals(MyApplication.initViewOk)){
-                    binding.editText.setEnabled(true);
-                    binding.qiandao.setClickable(true);
                     toast0.cancel();
                     toast = Toast.makeText(MainActivity.this, "加载完成！", Toast.LENGTH_SHORT);
                 }
+                binding.editText.setEnabled(true);
+                binding.qiandao.setClickable(true);
                 if(toast==null) return;
                 toast.setGravity(Gravity.CENTER,0,0);
                 toast.show();
@@ -86,6 +88,8 @@ public class MainActivity extends BaseActivity {
 
     public class Event{
         public void qiandaoORqiantui(View view){
+            binding.editText.setEnabled(false);
+            binding.qiandao.setClickable(false);
             vm.qiandaoORqiantui();
         }
     }

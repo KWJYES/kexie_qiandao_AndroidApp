@@ -143,11 +143,12 @@
             app:layout_constraintTop_toBottomOf="@+id/cardView">
 
             <TextView
+                android:background="@{vm.online ? @drawable/btn_qiantui : @drawable/btn_qiandao}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@{vm.online?`签退`:`签到`}"
-                android:textColor="@{vm.online ? 0xFFE53935 : 0xFF000000}"
+                android:textColor="@{vm.online ? 0xFFE53935 : 0xFFFFFFFF}"
                 android:textSize="18sp" />
         </androidx.cardview.widget.CardView>
 

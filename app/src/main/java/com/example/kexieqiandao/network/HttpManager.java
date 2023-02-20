@@ -72,6 +72,8 @@ public class HttpManager {
                     } else if (code == -201) {
                         online.setValue(true);
                         qiandaoStatus.setValue(MyApplication.qiandaoRepeat);
+                    }else if (code == -205) {
+                        qiandaoStatus.setValue(MyApplication.opTooFaster);
                     }else if (code == -206) {
                         qiandaoStatus.setValue(MyApplication.qiandaoOutTime);
                     } else {
@@ -142,10 +144,13 @@ public class HttpManager {
                         JSONObject data = jsonObject.getJSONObject("data");
                         uid.setValue(data.getString("userId"));
                         uname.setValue(data.getString("userName"));
-                        if (0==data.getInt("status")){
-                            time.setValue("本次签到开始时间: null");
-                            online.setValue(false);
-                        }else {
+                        try{
+                            String status=data.getString("status");
+                            if (data.getString("status").equals("已签退")){//已签退
+                                time.setValue("本次签到开始时间: null");
+                                online.setValue(false);
+                            }
+                        }catch (Exception e){//已签到
                             time.setValue("本次签到开始时间: " + data.getString("start"));
                             online.setValue(true);
                         }
