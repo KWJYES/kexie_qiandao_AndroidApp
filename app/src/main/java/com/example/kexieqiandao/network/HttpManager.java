@@ -5,6 +5,8 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.kexieqiandao.MyApplication;
+import com.example.kexieqiandao.entity.ComplaintRequestBody;
+import com.example.kexieqiandao.entity.ResponseBean;
 import com.example.kexieqiandao.entity.UserId;
 import com.example.kexieqiandao.local.SharedPreferencesManager;
 import com.example.kexieqiandao.network.retrofit_api.IService;
@@ -14,7 +16,9 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -62,7 +66,7 @@ public class HttpManager {
                         week.setValue(data.getString("week"));
                         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss ");
                         Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-                        time.setValue("本次签到开始时间: " + formatter.format(curDate));
+                        time.setValue("本次签到开始时间:\n  " + formatter.format(curDate));
                         SharedPreferencesManager.getInstance().applyUId(MyApplication.getContext(),uid.getValue());
                         SharedPreferencesManager.getInstance().applyUName(MyApplication.getContext(),uname.getValue());
                         SharedPreferencesManager.getInstance().applyTotalTime(MyApplication.getContext(),totalTime.getValue());
@@ -151,7 +155,7 @@ public class HttpManager {
                                 online.setValue(false);
                             }
                         }catch (Exception e){//已签到
-                            time.setValue("本次签到开始时间: " + data.getString("start"));
+                            time.setValue("本次签到开始时间:\n  " + data.getString("start"));
                             online.setValue(true);
                         }
                         totalTime.setValue(SharedPreferencesManager.getInstance().getTotalTime(MyApplication.getContext()));
@@ -162,12 +166,63 @@ public class HttpManager {
                 } catch (JSONException | IOException e) {
                     e.printStackTrace();
                 }
-                qiandaoStatus.setValue(MyApplication.initViewOk);
+                qiandaoStatus.setValue(MyApplication.initOnlineOk);
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 qiandaoStatus.setValue(MyApplication.netWorkError);
+            }
+        });
+    }
+
+    public void getOnlineUser(MutableLiveData<List<ResponseBean.DataDTO>> onlineUserList,MutableLiveData<String> getOnlineUserStatus){
+        service.recordOnline().enqueue(new Callback<ResponseBean>() {
+            @Override
+            public void onResponse(Call<ResponseBean> call, Response<ResponseBean> response) {
+                if (response.code()!=200){
+                    getOnlineUserStatus.setValue(MyApplication.fail);
+                    return;
+                }
+                ResponseBean responseBean=response.body();
+                onlineUserList.setValue(responseBean != null ? responseBean.getData() : new ArrayList<>());
+                getOnlineUserStatus.setValue(MyApplication.succeed);
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBean> call, Throwable t) {
+                getOnlineUserStatus.setValue(MyApplication.fail);
+            }
+        });
+    }
+
+
+    public void complaint(ComplaintRequestBody body, MutableLiveData<String> complaintStatus) {
+        service.complaint(body).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code()==200){
+                    try {
+                        JSONObject jsonObject=new JSONObject(response.body().string());
+                        Log.d("HttpManager", jsonObject.toString());
+                        if (jsonObject.getString("msg").equals("举报成功")){
+                            complaintStatus.setValue(MyApplication.succeed);
+                        }else {
+                            complaintStatus.setValue(MyApplication.fail);
+                        }
+                    } catch (IOException | JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                }else {
+                    complaintStatus.setValue(MyApplication.fail);
+                    Log.d("HttpManager", "complaint code = "+response.code());
+                    Log.d("HttpManager", "ComplaintRequestBody = "+body.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                complaintStatus.setValue(MyApplication.netWorkError);
             }
         });
     }

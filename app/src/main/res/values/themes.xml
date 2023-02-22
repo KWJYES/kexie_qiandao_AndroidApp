@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.KexieQiandao" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#006200EE</item>
+        <item name="colorPrimary">#0090CAF9</item>
         <item name="colorPrimaryVariant">#003700B3</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -13,4 +13,9 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="MyEditText" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@android:color/darker_gray</item>
+        <item name="colorControlActivated">#03A9F4</item>
+    </style>
+
 </resources>

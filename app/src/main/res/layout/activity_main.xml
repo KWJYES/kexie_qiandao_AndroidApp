@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="vm"
             type="com.example.kexieqiandao.viewmodel.MainViewModel" />
@@ -21,158 +23,226 @@
         android:background="#F9F9F9"
         tools:context=".activity.MainActivity">
 
-        <com.example.kexieqiandao.ui.StatusBarHeightView
-            android:id="@+id/statusBarHeightView"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/main_logo"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/statusBarHeightView" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:gravity="center_vertical"
-            android:paddingStart="20dp"
-            android:text="三院科协"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/main_logo"
-            app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintStart_toEndOf="@+id/main_logo"
-            app:layout_constraintTop_toTopOf="@+id/main_logo"
-            tools:ignore="RtlSymmetry" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.1" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.9" />
-
-        <EditText
-            android:text="@={vm.uid}"
-            android:textColor="@color/black"
-            android:textCursorDrawable="@drawable/et_cursor"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="20dp"
-            android:id="@+id/editText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/main_logo" />
-
-        <androidx.cardview.widget.CardView
-            android:layout_marginTop="20dp"
-            android:id="@+id/cardView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="15dp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/editText">
-
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@{vm.online ? @drawable/online : @drawable/notonline}"
-                android:orientation="vertical"
-                android:padding="15dp">
+                android:layout_height="wrap_content">
+
+                <com.example.kexieqiandao.ui.StatusBarHeightView
+                    android:id="@+id/statusBarHeightView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/main_logo"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintStart_toStartOf="@+id/guideline2"
+                    app:layout_constraintTop_toBottomOf="@+id/statusBarHeightView" />
 
                 <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center_vertical"
+                    android:paddingStart="20dp"
+                    android:text="三院科协"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/main_logo"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                    app:layout_constraintStart_toEndOf="@+id/main_logo"
+                    app:layout_constraintTop_toTopOf="@+id/main_logo"
+                    tools:ignore="RtlSymmetry" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{`学号: `+vm.uid}"
-                    android:textColor="@{vm.online?0xFF000000:0xFFFFFFFF}" />
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.1" />
 
-                <TextView
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@{`姓名: `+vm.uname}"
-                    android:textColor="@{vm.online?0xFF000000:0xFFFFFFFF}" />
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.9" />
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <EditText
+                    android:theme="@style/MyEditText"
+                    android:id="@+id/editText"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@{vm.time}"
-                    android:textColor="@{vm.online?0xFF000000:0xFFFFFFFF}" />
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@={vm.uid}"
+                    android:textColor="@color/black"
+                    android:textCursorDrawable="@drawable/et_cursor"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                    app:layout_constraintStart_toStartOf="@+id/guideline2"
+                    app:layout_constraintTop_toBottomOf="@+id/main_logo" />
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@{`本周签到总时长: `+vm.totalTime}"
-                    android:textColor="@{vm.online?0xFF000000:0xFFFFFFFF}" />
+                    android:layout_marginTop="20dp"
+                    app:cardCornerRadius="15dp"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                    app:layout_constraintStart_toStartOf="@+id/guideline2"
+                    app:layout_constraintTop_toBottomOf="@+id/editText">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@{vm.online ? @drawable/online : @drawable/notonline}"
+                        android:orientation="vertical"
+                        android:padding="15dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{`学号: `+vm.uid}"
+                            android:textColor="@{vm.online?0xFF000000:0xFFFFFFFF}" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="@{`姓名: `+vm.uname}"
+                            android:textColor="@{vm.online?0xFF000000:0xFFFFFFFF}" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="@{vm.time}"
+                            android:textColor="@{vm.online?0xFF000000:0xFFFFFFFF}" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="@{`本周签到总时长: `+vm.totalTime}"
+                            android:textColor="@{vm.online?0xFF000000:0xFFFFFFFF}" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="@{`周序: `+vm.week}"
+                            android:textColor="@{vm.online?0xFF000000:0xFFFFFFFF}" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/qiandao"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="20dp"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:onClick="@{event::qiandaoORqiantui}"
+                    app:cardCornerRadius="15dp"
+                    app:layout_constraintDimensionRatio="H,340:97"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                    app:layout_constraintStart_toStartOf="@+id/guideline2"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@{vm.online ? @drawable/btn_qiantui : @drawable/btn_qiandao}"
+                        android:gravity="center"
+                        android:text="@{vm.online?`签退`:`签到`}"
+                        android:textColor="@{vm.online ? 0xFFE53935 : 0xFFFFFFFF}"
+                        android:textSize="18sp" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@{`周序: `+vm.week}"
-                    android:textColor="@{vm.online?0xFF000000:0xFFFFFFFF}" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:visibility="@{vm.online?View.VISIBLE:View.GONE}"
+                    app:cardCornerRadius="1dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/qiandao">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/qiandao"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="20dp"
-            android:foreground="?attr/selectableItemBackground"
-            android:onClick="@{event::qiandaoORqiantui}"
-            app:cardCornerRadius="15dp"
-            app:layout_constraintDimensionRatio="H,340:97"
-            app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/cardView">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-            <TextView
-                android:background="@{vm.online ? @drawable/btn_qiantui : @drawable/btn_qiandao}"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@{vm.online?`签退`:`签到`}"
-                android:textColor="@{vm.online ? 0xFFE53935 : 0xFFFFFFFF}"
-                android:textSize="18sp" />
-        </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:layout_margin="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@{`当前在教室的人数：`+vm.onlineNun}"
+                            android:textColor="@color/black"
+                            android:textSize="17sp" />
+                        <EditText
+                            android:text="@={vm.searchText}"
+                            android:hint="Search"
+                            android:theme="@style/MyEditText"
+                            android:textCursorDrawable="@drawable/et_cursor"
+                            android:layout_marginHorizontal="7dp"
+                            android:drawableRight="@drawable/ic_select"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                        <LinearLayout
+                            android:layout_marginTop="1dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingVertical="5dp"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:gravity="center"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="5"
+                                android:text="学号/姓名"/>
+                            <TextView
+                                android:gravity="center"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="4"
+                                android:text="部门/地点"/>
+                            <TextView
+                                android:gravity="center"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="3"
+                                android:text="操作"/>
+                        </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="20dp"
-            android:text="ps:“本周签到总时长”可能不是最新数据；通过签到/签退可更新为最新数据~"
-            app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/qiandao" />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_marginTop="10dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:gravity="center"
-            android:text="更多功能敬请期待~\nbug反馈QQ:1610017676"
-            app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#D0D7DE" />
 
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_online_user"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/qiandao" />
+                        <TextView
+                            android:gravity="center_horizontal"
+                            android:text="没有更多啦~"
+                            android:layout_width="match_parent"
+                            android:layout_height="400dp"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

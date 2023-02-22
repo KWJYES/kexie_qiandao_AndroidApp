@@ -27,5 +27,7 @@ public class MyApplication extends Application {
     public static String qiantuiNo ="qiantuiNo";//没有签到op
     public static String opTooFaster ="opTooFaster";//操作太频繁了
     public static String netWorkError ="netWorkError";
-    public static String initViewOk ="initViewOk";
+    public static String initOnlineOk ="initOnlineOk";
+    public static String succeed ="succeed";
+    public static String fail ="fail";
 }
